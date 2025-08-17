@@ -1,18 +1,2 @@
-<p>Nombre del empleado: {{nombre}}</p>
-<p>Apellidodel empleado: {{apellido}}</p>
-<p>Edad del empleado: {{edad}}</p>
-
-<p>Empresa del empleado: {{empresa}}</p>
-
-<p>Ingrese la Empresa: <input type="text" [disabled]="dontWrite" [(ngModel)]="empresa"/></p>
-
-@if(!dontWrite){
-    <button value="complete" (click)="formComplete($event)">Completo</button>
-}
-@if(dontWrite){
-    <button value="delete" (click)="formDelete($event)">Eliminar</button>
-}
-<br/>
-<br/>
-
-{{message}}
+<li [ngClass]="{python:  empleado.contenido == 'Python'}">Titulo: {{empleado.titulo}}</li>
+<li [ngStyle]="{color: empleado.contenido == 'Python' ? 'red' : 'green'}">Contenido: {{empleado.contenido}}</li>
