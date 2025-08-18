@@ -1,0 +1,115 @@
+@if(!loading){
+    <nav class="sticky-top bg-white shadow-sm mb-3">
+        <div class="d-flex justify-content-center align-items-center py-2">
+          hola
+            <span animation="border" role="status" variant="primary"></span>
+        </div>
+    </nav>
+}
+@else{
+    <nav class="navbar navbar-expand-lg sticky-top bg-white shadow-sm mb-3">
+        <div class="container-fluid">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-button">
+                    <a class="nav-link" routerLink="/">Inicio</a>
+                </li>
+                <li class="nav-button">
+                    <a class="nav-link" routerLink="/store">Tienda</a>
+                </li>
+                <li class="nav-button">
+                    <a class="nav-link" routerLink="/about">Sobre Nosotros</a>
+                </li>
+            @if (isEmployee) {
+                <li class="nav-button">
+                    <a class="nav-link" routerLink="/dashboard">Panel de Administración</a>
+                </li>
+
+            }
+            </ul>
+
+            <button
+                (click)="openCart()"               
+                class="buttonCart 
+                btn 
+                btn-outline-primary 
+                rounded-circle
+                d-flex 
+                justify-content-center 
+                align-items-center">
+                
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 576 512"
+                fill="currentColor"
+                >
+                    <path d="M528.12 301.319l47.273-208C578.979 78.109 567.48 64 552.002 64H136L129.315 27.319A32.002 32.002 0 0097.824 0H32C14.327 0 0 14.327 0 32s14.327 32 32 32h43.824l70.558 383.681A63.997 63.997 0 00208 480h320c17.673 0 32-14.327 32-32s-14.327-32-32-32H228.721l-9.6-52H528a32.001 32.001 0 0031.12-26.681z" />
+                    <circle cx="160" cy="500" r="80" fill="currentColor" />
+                    <circle cx="400" cy="500" r="80" fill="currentColor" />
+                </svg>
+
+                @if(cartQuantity > 0){
+                    <div
+                        class="cartQuantity
+                        rounded-circle 
+                        bg-danger 
+                        d-flex 
+                        justify-content-center 
+                        align-items-center">
+
+                        {{cartQuantity}}
+                    </div>
+                }
+            </button>
+
+            @if(isLogged){
+                <div class="d-flex align-items-center px-2">
+                    <div 
+                    class="d-flex flex-column align-items-center"
+                    style="padding-top: 15px">
+
+                        <i class="fa-solid fa-user fa-lg mb-2" title="Perfil"></i>
+                        <small class="text-secondary">user?.username</small>
+                    </div>
+                </div>
+            }
+            @else {
+                <button
+                    class="btn btn-outline-secondary sm rounded-circle d-flex justify-content-center align-items-center"
+                    (click)="navigateLogin()"
+                    style="width: 2.7rem; height: 2.7rem;">
+
+                    Login
+                </button>
+            }
+
+        </div>
+    </nav>
+}
+<!--
+
+
+
+
+
+        @if(!isEmployee){
+            
+
+            { && (
+              
+            )}
+          </Button>
+        )}
+
+        <div className="d-flex align-items-center gap-3">
+          { ? (
+            <>
+                
+            </>
+          ) : (
+            
+          )}
+        </div>
+      </Container>
+    </NavbarBs>
+}
+-->
