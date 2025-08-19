@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import Empleado from "../empleados/empleado.model"
+import Empleado from "../../core/models/empleado.model"
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

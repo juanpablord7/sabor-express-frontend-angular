@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { EmpleadosComponent } from './empleados/empleados.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { EmpleadosComponent } from './features/empleados/empleados.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 
 
 @Component({

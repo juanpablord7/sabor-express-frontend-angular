@@ -4,7 +4,7 @@ import { EmpleadoComponent } from "../empleado/empleado.component";
 import { FormsModule } from "@angular/forms"
 import { CommonModule } from '@angular/common';
 
-import Empleado from "./empleado.model";
+import Empleado from "../../core/models/empleado.model";
 
 @Component({
     selector: "app-empleados",
