@@ -22,9 +22,7 @@ export class StoreItemComponent {
 
   formatCurrency = formatCurrency
 
-  quantity: number;
-
-  ngOnInit() {
-    this.quantity = this.shoppingCartService.getItemQuantity(this.product.id);
+  get quantity(): number {
+    return this.shoppingCartService.getItemQuantity(this.product.id);
   }
 }

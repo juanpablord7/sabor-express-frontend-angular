@@ -1,37 +1,40 @@
 <div class="card h-100">
-    <img class="card-img-top"
+    <img 
+        class="card-img-top"
         [src]="imagePath + product.image"
-        style="height: 200px; object-fit: cover;" />
+        style="height: 200px; object-fit: cover;" 
+    />
 
     <div class="card-body d-flex flex-column">
-        <div class="card-title d-flex justify-content-between 
-            align-items-baseline mb-4">
-
-            <span class="fs-5">{{product.name}}</span>
-            <span class="ms-6 text-muted">{{formatCurrency(product.price)}}</span>
+        <div class="card-title d-flex justify-content-between align-items-baseline mb-4">
+            <span class="fs-5">{{ product.name }}</span>
+            <span class="ms-5 text-muted">{{ formatCurrency(product.price) }}</span>
+        </div>
+        
         <div class="mt-auto">
             @if(quantity === 0){
-                <button class="w-100" (click)="this.shoppingCartService.increaseQuantity(product.id, product.name)">
+                <button 
+                    class="btn btn-primary w-100"
+                    (click)="shoppingCartService.increaseQuantity(product.id, product.name)">
+                    
                     + Añadir al Carrito
                 </button>
             }
             @else {
-                <div class="d-flex align-itmes-center
-                    flex-column" style="gap: .5rem">
-                    
-                    <div class="d-flex align-items-center justify-content-center" 
-                    style="gap: .5rem">
-
-                        <button (click)="this.shoppingCartService.decreaseQuantity(product.id)">-</button>
-                        <div>
-                            <span class="fs-3">{{quantity}} </span>
-                            en el carrito
-                        </div>
-                        <button (click)="this.shoppingCartService.increaseQuantity(product.id, product.name)">+</button>       
-                    </div>
-                    <button class="btn-danger sm"
-                        (click)="this.shoppingCartService.removeFromCart(product.id)">
+                <div class="d-flex flex-column align-items-center" style="gap: .5rem">
+                    <div class="d-flex align-items-center justify-content-center" style="gap: .5rem">
+                        <button class="btn btn-outline-secondary"
+                        (click)="shoppingCartService.decreaseQuantity(product.id)">-</button>
                         
+                        <div>
+                        <span class="fs-3">{{ quantity }}</span> en el carrito
+                        </div>
+                        
+                        <button class="btn btn-outline-secondary"
+                        (click)="shoppingCartService.increaseQuantity(product.id, product.name)">+</button>
+                    </div>
+                    <button class="btn btn-danger btn-sm"
+                        (click)="shoppingCartService.removeFromCart(product.id)">
                         Remove
                     </button>
                 </div>

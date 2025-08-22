@@ -24,38 +24,29 @@ export class ShoppingCartService {
     return this.cartItems.find(item => item.id === id)?.quantity || 0
   }
 
-  increaseQuantity(id:number, name:string){
-    if (this.cartItems.find(item => item.id === id) == null){
-      return [...this.cartItems, {id, quantity: 1, name: name}]
-    } 
-    else {
-      return this.cartItems.map(item =>{
-        if (item.id === id){
-          return {...item, quantity: item.quantity + 1}
-        } 
-        else{
-          return item
-        }
-      })
+  increaseQuantity(id: number, name: string) {
+    const item = this.cartItems.find(i => i.id === id);
+
+    if (item == null) {
+      this.cartItems.push({ id, quantity: 1, name });
+    } else {
+      item.quantity++;
     }
   }
 
-  decreaseQuantity(id:number){
-    if (this.cartItems.find(item => item.id === id)?.quantity === 1){
-      return this.cartItems.filter(item => item.id !== id)
-    } 
-    else {
-      return this.cartItems.map(item =>{
-        if (item.id === id){
-          return {...item, quantity: item.quantity - 1}
-        } else{
-          return item
-        }
-      })
+
+  decreaseQuantity(id: number) {
+    const item = this.cartItems.find(i => i.id === id);
+
+    if (item && item.quantity === 1) {
+      this.cartItems = this.cartItems.filter(i => i.id !== id);
+    } else if (item) {
+      item.quantity--;
     }
   }
 
-  removeFromCart(id:number){
-    return this.cartItems.filter(item => item.id !== id)
+  removeFromCart(id: number) {
+    this.cartItems = this.cartItems.filter(i => i.id !== id);
   }
+
 }
