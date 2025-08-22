@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome"
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
-  imports: [ FontAwesomeModule ],
+  imports: [FontAwesomeModule, RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  constructor(private router:Router){
+
+  }
   //Navegar:
   //const navigate = useNavigate();
 
@@ -16,7 +21,7 @@ export class NavbarComponent {
 
   //Acceder al contexto:
   openCart(){
-    console.log("Hola")
+    console.log("Se abrio")
   }
   cartQuantity = 1;
   //const { openCart, cartQuantity } = useShoppingCart();
@@ -26,7 +31,7 @@ export class NavbarComponent {
   isLogged: Boolean = false;
 
   navigateLogin(){
-    console.log("Hola")
+    this.router.navigate(["login"])
   }
   
   //Ver

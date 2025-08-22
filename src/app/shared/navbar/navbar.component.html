@@ -11,17 +11,17 @@
         <div class="container-fluid">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-button">
-                    <a class="nav-link" routerLink="/">Inicio</a>
+                    <a class="nav-link" [routerLink]="['/']">Inicio</a>
                 </li>
                 <li class="nav-button">
-                    <a class="nav-link" routerLink="/store">Tienda</a>
+                    <a class="nav-link" [routerLink]="['/store']">Tienda</a>
                 </li>
                 <li class="nav-button">
-                    <a class="nav-link" routerLink="/about">Sobre Nosotros</a>
+                    <a class="nav-link" [routerLink]="['/about']">Sobre Nosotros</a>
                 </li>
             @if (isEmployee) {
                 <li class="nav-button">
-                    <a class="nav-link" routerLink="/dashboard">Panel de Administración</a>
+                    <a class="nav-link" [routerLink]="['/dashboard']">Panel de Administración</a>
                 </li>
 
             }
