@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import Category from '../../core/models/category.model';
 import { NgClass } from "@angular/common";
 import Product from '../../core/models/product.model';
 import { StoreItemComponent } from './components/store-item/store-item.component';
+import { ProductService } from '../../core/services/product/product.service';
 
 @Component({
   selector: 'app-store',
@@ -11,6 +12,9 @@ import { StoreItemComponent } from './components/store-item/store-item.component
   styleUrl: './store.component.css'
 })
 export class StoreComponent {
+
+  productService = inject(ProductService)
+
   imagePath = ""
 
   limit = 0
@@ -18,9 +22,7 @@ export class StoreComponent {
 
   categories: Category[] = []
 
-  products: Product[] = [
-    {id: 1, name: "Hamburg", price: 10.99, category: 1,image: "ham.png"}
-  ]
+  products: Product[] =  this.productService.products
 
   selectedCategory: number | undefined;
 

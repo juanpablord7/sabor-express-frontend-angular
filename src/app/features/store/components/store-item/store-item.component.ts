@@ -22,7 +22,19 @@ export class StoreItemComponent {
 
   formatCurrency = formatCurrency
 
-  get quantity(): number {
+  quantity(): number {
     return this.shoppingCartService.getItemQuantity(this.product.id);
+  }
+
+  increaseQuantity() {
+    this.shoppingCartService.increaseQuantity(this.product.id, this.product.name);
+  }
+
+  decreaseQuantity() {
+    this.shoppingCartService.decreaseQuantity(this.product.id);
+  }
+
+  removeFromCart() {
+    this.shoppingCartService.removeFromCart(this.product.id);
   }
 }
