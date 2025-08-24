@@ -1,7 +1,8 @@
-import { inject, Injectable, signal, Signal } from '@angular/core';
+import { effect, inject, Injectable, resource, signal } from '@angular/core';
 import Product from '../../models/product.model';
 
 import { HttpClient } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +11,19 @@ export class ProductService {
 
   httpClient = inject(HttpClient)
 
-  constructor() { }
+  constructor() { 
+  }
 
   private apiUrl = "http://localhost:8082/product";
 
-  private products = signal<Product[]>([]);
+  limit = signal(0);
+  page = signal(0);
+  selectedCategory = signal<number|undefined>(undefined);
 
-  // Devuelve un observable que el componente puede usar
-  getProducts(){
-    this.httpClient.get<Product[]>(this.apiUrl).subscribe(
-      response => this.products.set(response),
-      error => console.log(error)
-    );
-  }
+  products = resource({
+    request: () => ({limit: this.limit(), page: this.page()}),
+    loader: ({request}) => firstValueFrom(
+      this.httpClient.get<Product[]>(`${this.apiUrl}?page=${request.page}&limit=${request.limit}`)
+    )
+  });
 }

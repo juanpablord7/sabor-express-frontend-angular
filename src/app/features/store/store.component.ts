@@ -1,9 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import Category from '../../core/models/category.model';
 import { NgClass } from "@angular/common";
-import Product from '../../core/models/product.model';
-import { StoreItemComponent } from './components/store-item/store-item.component';
 import { ProductService } from '../../core/services/product/product.service';
+import { StoreItemComponent } from "./components/store-item/store-item.component";
 
 @Component({
   selector: 'app-store',
@@ -12,26 +11,24 @@ import { ProductService } from '../../core/services/product/product.service';
   styleUrl: './store.component.css'
 })
 export class StoreComponent {
-
   productService = inject(ProductService)
+
+  products = this.productService.products;
+
+  selectedCategory = this.productService.selectedCategory
+
+  limit = this.productService.limit;
+
+  changeLimit(event: Event) {
+    const select = event.target as HTMLSelectElement;
+    this.productService.limit.set(Number(select.value));
+  }
 
   imagePath = ""
 
-  limit = 0
-  loading = false
-
   categories: Category[] = []
 
-  products: Product[] =  this.productService.products
-
-  selectedCategory: number | undefined;
-
-  handleCategorySelect(id?: number){
-
+  handleCategorySelect = (newSelected: number|undefined) => {
+    this.productService.selectedCategory.set(newSelected);
   }
-
-  changeLimit(){
-
-  }
-
 }
