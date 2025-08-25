@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import Category from '../../core/models/category.model';
 import { NgClass } from "@angular/common";
-import { ProductService } from '../../core/services/product/product.service';
+import { ProductService } from '../product/services/product.service';
 import { StoreItemComponent } from "./components/store-item/store-item.component";
 
 @Component({

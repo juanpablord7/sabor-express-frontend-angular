@@ -1,5 +1,5 @@
 import { effect, inject, Injectable, resource, signal } from '@angular/core';
-import Product from '../../models/product.model';
+import Product, { CreateProductSchema } from '../../../core/models/product.model';
 
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
@@ -26,4 +26,5 @@ export class ProductService {
       this.httpClient.get<Product[]>(`${this.apiUrl}?page=${request.page}&limit=${request.limit}`)
     )
   });
+
 }

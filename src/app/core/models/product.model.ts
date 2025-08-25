@@ -5,3 +5,10 @@ export default interface Product{
     category: number
     image: string
 }
+
+export interface CreateProductSchema{
+    name: string
+    price: number
+    category: number
+    image: string
+}
