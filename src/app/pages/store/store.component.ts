@@ -1,8 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
 import Category from '../../core/models/category.model';
 import { NgClass } from "@angular/common";
-import { ProductService } from '../product/services/product.service';
 import { StoreItemComponent } from "./components/store-item/store-item.component";
+import { ProductService } from '../../features/product/services/product.service';
+import { CategoryService } from '../../features/category/services/category.service';
 
 @Component({
   selector: 'app-store',
@@ -11,7 +12,12 @@ import { StoreItemComponent } from "./components/store-item/store-item.component
   styleUrl: './store.component.css'
 })
 export class StoreComponent {
-  productService = inject(ProductService)
+  categoryService = inject(CategoryService);
+  productService = inject(ProductService);
+
+  imagePath = ""
+
+  categories: Category[] = this.categoryService.categories();
 
   products = this.productService.products;
 
@@ -19,14 +25,11 @@ export class StoreComponent {
 
   limit = this.productService.limit;
 
+  
   changeLimit(event: Event) {
     const select = event.target as HTMLSelectElement;
     this.productService.limit.set(Number(select.value));
   }
-
-  imagePath = ""
-
-  categories: Category[] = []
 
   handleCategorySelect = (newSelected: number|undefined) => {
     this.productService.selectedCategory.set(newSelected);

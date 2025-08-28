@@ -6,9 +6,5 @@ export default interface Product{
     image: string
 }
 
-export interface CreateProductSchema{
-    name: string
-    price: number
-    category: number
-    image: string
-}
+export type ProductCreate = Omit<Product, 'id'>;
+export type ProductUpdate = Partial<Product>;

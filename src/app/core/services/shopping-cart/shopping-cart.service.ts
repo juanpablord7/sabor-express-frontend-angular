@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import CartItem from '../../../core/models/cartItem.model';
+import CartItem from '../../models/cartItem.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,6 @@ import CartItem from '../../../core/models/cartItem.model';
 export class ShoppingCartService {
 
   constructor() { }
-
 
   cartItems: CartItem[] = [];
 
@@ -20,7 +19,6 @@ export class ShoppingCartService {
   )
 
   getItemQuantity(id:number){
-    
     return this.cartItems.find(item => item.id === id)?.quantity || 0
   }
 
@@ -33,7 +31,6 @@ export class ShoppingCartService {
       item.quantity++;
     }
   }
-
 
   decreaseQuantity(id: number) {
     const item = this.cartItems.find(i => i.id === id);
