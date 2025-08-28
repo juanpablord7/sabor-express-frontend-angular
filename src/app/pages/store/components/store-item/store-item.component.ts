@@ -1,8 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import Product from '../../../../core/models/product.model';
 import { ShoppingCartService } from '../../../../core/services/shopping-cart/shopping-cart.service';
-
-import formatCurrency from '../../../../core/utils/formatCurrency';
+import { FormatCurrencyService } from '../../../../core/utils/format-currency/format-currency.service';
 
 @Component({
   selector: 'app-store-item',
@@ -11,12 +10,17 @@ import formatCurrency from '../../../../core/utils/formatCurrency';
   styleUrl: './store-item.component.css'
 })
 export class StoreItemComponent {
-  @Input({required: true}) product!: Product;
+  @Input({required: true}) product: Product;
 
   // Services:
   shoppingCartService = inject(ShoppingCartService)
+  formatCurrencyService = inject(FormatCurrencyService);
 
   imagePath = ""
+
+  formatCurrency(price: number){
+    this.formatCurrency(price)
+  }
 
   quantity(): number {
     return this.shoppingCartService.getItemQuantity(this.product.id);

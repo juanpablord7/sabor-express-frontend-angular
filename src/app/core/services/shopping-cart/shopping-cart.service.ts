@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import CartItem from '../../models/cartItem.model';
 
 @Injectable({
@@ -8,42 +8,51 @@ export class ShoppingCartService {
 
   constructor() { }
 
-  cartItems: CartItem[] = [];
+  cartItems = signal<Record<number, CartItem>>({});
 
-  isOpen: Boolean = false;
+  isOpen = signal<boolean>(false);
 
-  openCart = () => { this.isOpen = true }
-  closeCart = () => { this.isOpen = false}
-  cartQuantity = this.cartItems.reduce((quantity, item) => 
-        item.quantity + quantity, 0
-  )
+  openCart = () => { this.isOpen.set(true) }
+  closeCart = () => { this.isOpen.set(false) }
+  
+  cartQuantity = computed(() => {
+    return Object.values(this.cartItems()).reduce(
+      (quantity, item) => quantity + item.quantity,
+      0
+    );
+  });
 
-  getItemQuantity(id:number){
-    return this.cartItems.find(item => item.id === id)?.quantity || 0
+  getItemQuantity(id: number) {
+    return this.cartItems()[id]?.quantity || 0;
   }
 
   increaseQuantity(id: number, name: string) {
-    const item = this.cartItems.find(i => i.id === id);
-
-    if (item == null) {
-      this.cartItems.push({ id, quantity: 1, name });
+    const current = { ...this.cartItems() };
+    if (current[id]) {
+      current[id].quantity++;
     } else {
-      item.quantity++;
+      current[id] = { id, name, quantity: 1 };
     }
+    this.cartItems.set(current);
   }
 
   decreaseQuantity(id: number) {
-    const item = this.cartItems.find(i => i.id === id);
+    const current = { ...this.cartItems() };
+    if (!current[id]) return;
 
-    if (item && item.quantity === 1) {
-      this.cartItems = this.cartItems.filter(i => i.id !== id);
-    } else if (item) {
-      item.quantity--;
+    if (current[id].quantity === 1) {
+      delete current[id];
+    } else {
+      current[id].quantity--;
     }
+
+    this.cartItems.set(current);
   }
 
   removeFromCart(id: number) {
-    this.cartItems = this.cartItems.filter(i => i.id !== id);
+    const current = { ...this.cartItems() };
+    delete current[id];
+    this.cartItems.set(current);
   }
 
 }

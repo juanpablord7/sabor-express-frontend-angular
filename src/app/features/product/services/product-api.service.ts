@@ -23,6 +23,14 @@ export class ProductApiService {
     (`${this.apiUrl}?page=${this.page()}&limit=${this.limit()}`);
   }
 
+  findProductsById(idProducts: number[]){
+    // Transform the list of ids into a list: [1,4,8,10]
+    const idList = idProducts.join(',');
+
+    return this.httpClient.get<Product[]>
+    (`${this.apiUrl}?find=${idList}`);
+  }
+
   createProduct(newProduct: ProductCreate){
     return this.httpClient.post<Product>(this.apiUrl, newProduct);
   }

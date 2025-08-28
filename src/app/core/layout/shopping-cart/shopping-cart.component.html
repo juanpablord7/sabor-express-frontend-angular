@@ -1,0 +1,32 @@
+<div class="offcanvas offcanvas-end cartShoppingBar" tabindex="-1" [class.show]="isOpen()" style="visibility: visible;">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Cart</h5>
+        <button type="button" class="btn-close" aria-label="Close" (click)="closeCart()"></button>
+    </div>
+
+    <div class="offcanvas-body">
+        <div class="d-flex flex-column gap-3">
+            <ng-container *ngFor="let item of cartItems() | keyvalue">
+
+                @if(cartProducts()){
+                    <app-cart-item [cartItem]="item.value" [product]="cartProducts()[item.value.id]"/>
+                }@else {
+                    <app-cart-item [cartItem]="item.value"/>
+                }
+            </ng-container>
+
+            <div className="ms-auto fs-5">
+                Total: {{getTotalPrice()}}
+            </div>
+            
+
+            <div class="d-flex justify-content-center">
+                <button style="width: 70%"
+                    (click)="handleCreateOrder()"
+                >
+                    Registrar Orden
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -24,4 +24,8 @@ export class ProductService {
     )
   });
 
+  findProducts(ids: number[]){
+    return this.productApiService.findProductsById(ids)
+  }
+
 }

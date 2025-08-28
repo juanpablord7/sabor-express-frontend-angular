@@ -1,0 +1,43 @@
+@if(cartItem){
+    <div class="d-flex align-items-center gap-2">
+
+        <!-- Imagen del producto -->
+        @if(product){
+            <img 
+                class="justify-content-center"
+                [src]="imagePath + product.image"
+                height="75px"
+                style="aspect-ratio: 1/1; object-fit: cover;"
+                />
+        }
+
+        <!-- Información del producto -->
+        <div>
+            <div>{{ cartItem.name }}</div>
+            <table style="margin-top: 0.25rem;">
+                <tbody>
+                    <tr>
+                        @if(product){
+                            <td style="width: 70px;">{{ formatCurrency(product.price) }}</td>
+                        }
+                        <td style="padding-left: 1rem; color: green;">x{{ cartItem.quantity }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Precio total y botón eliminar -->
+        <div class="ms-auto d-flex flex-column align-items-end gap-1">
+            @if(product){
+                <div>
+                    {{ formatCurrency(product.price * cartItem.quantity) }}
+                </div>
+            }
+
+            <button class="btn btn-outline-danger btn-sm" (click)="removeFromCart()">
+                Eliminar
+            </button>
+        </div>
+            
+    </div>
+}
