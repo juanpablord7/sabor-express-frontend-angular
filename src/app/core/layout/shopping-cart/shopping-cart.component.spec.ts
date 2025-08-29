@@ -1,9 +1,9 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
-
+import { ComponentFixture,  TestBed } from '@angular/core/testing';
+import { screen } from "@testing-library/angular"
 import { ShoppingCartComponent } from './shopping-cart.component';
 import { ShoppingCartService } from '../../services/shopping-cart/shopping-cart.service';
 import { ProductService } from '../../../features/product/services/product.service';
-import { Signal, signal } from '@angular/core';
+import { signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
@@ -79,6 +79,7 @@ describe('ShoppingCartComponent', () => {
 
   it('should load cartProducts with the initial products of the shopping cart', () => {
     const products = component.cartProducts();
+    
     expect(products[1].name).toBe('Prod 1');
     expect(products[1].price).toBe(50);
 
@@ -86,7 +87,7 @@ describe('ShoppingCartComponent', () => {
   });
 
 
-  it('debería detectar un nuevo producto en cartItems y cargarlo en cartProducts', () => {
+  it('should detect a new product in cartItems and load it in cartProducts', () => {
     // Simulate a new products added to the shopping cart
     cartItemsSignal.set({
       1: { id: 1, name: 'Prod 1', quantity: 2 },
@@ -129,8 +130,7 @@ describe('ShoppingCartComponent', () => {
   });
 
   it('should call service.closeCart() and handleCreateOrder() when clicking "Registrar Orden"', () => {
-    const button = Array.from(fixture.nativeElement.querySelectorAll('button') as NodeListOf<HTMLButtonElement>)
-      .find(btn => btn.textContent?.trim() === 'Registrar Orden') as HTMLButtonElement;
+    const button = screen.getByText('Registrar Orden');
 
     button.click();
 
