@@ -1,7 +1,7 @@
 export default interface Category{
     id: number
-    name: String
-    image: String
+    name: string
+    image: string
 }
 
 export type CategoryCreate = Omit<Category, 'id'>;

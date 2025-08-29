@@ -1,14 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import Category, { CategoryCreate, CategoryUpdate } from '../../../core/models/category.model';
+import { ApiService } from '../../../core/services/api/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryApiService {
-  http = inject(HttpClient)
+  private http = inject(HttpClient)
+  private apiService = inject(ApiService)
 
-  private apiUrl = "http://localhost:8082/product";
+  private apiUrl = this.apiService.apiUrl;
 
   constructor() { }
 

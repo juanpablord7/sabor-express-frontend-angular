@@ -1,8 +1,8 @@
 export default interface User{
     id: number
-    name: String
-    username: String
-    email: String
+    name: string
+    username: string
+    email: string
     role: number
 }
 

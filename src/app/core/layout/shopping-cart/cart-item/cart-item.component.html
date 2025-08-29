@@ -5,7 +5,8 @@
         @if(product){
             <img 
                 class="justify-content-center"
-                [src]="imagePath + product.image"
+                [src]="imagePath(product.image)"
+                [alt]="product.image"
                 height="75px"
                 style="aspect-ratio: 1/1; object-fit: cover;"
                 />

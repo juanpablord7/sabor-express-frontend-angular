@@ -61,7 +61,6 @@ export class ShoppingCartComponent {
   }
 
   
-
   trackById(index: number, item: {key: number, value: CartItem}) {
     return item.key;
   }

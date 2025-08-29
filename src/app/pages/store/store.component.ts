@@ -4,6 +4,7 @@ import { NgClass } from "@angular/common";
 import { StoreItemComponent } from "./components/store-item/store-item.component";
 import { ProductService } from '../../features/product/services/product.service';
 import { CategoryService } from '../../features/category/services/category.service';
+import { ImageApiService } from '../../core/services/api/image-api.service';
 
 @Component({
   selector: 'app-store',
@@ -15,7 +16,9 @@ export class StoreComponent {
   categoryService = inject(CategoryService);
   productService = inject(ProductService);
 
-  imagePath = ""
+  imageApiService = inject(ImageApiService);
+
+  imagePath = this.imageApiService.getImageUrl
 
   categories: Category[] = this.categoryService.categories();
 

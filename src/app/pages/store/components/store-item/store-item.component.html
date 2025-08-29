@@ -2,7 +2,7 @@
     <div class="card h-100">
         <img 
             class="card-img-top"
-            [src]="imagePath + product.image"
+            [src]="imagePath(product.image)"
             style="height: 200px; object-fit: cover;" 
         />
 
@@ -16,7 +16,7 @@
                 @if(quantity() === 0){
                     <button 
                         class="btn btn-primary w-100"
-                        (click)="shoppingCartService.increaseQuantity(product.id, product.name)">
+                        (click)="increaseQuantity()">
                         
                         + Añadir al Carrito
                     </button>
@@ -25,17 +25,17 @@
                     <div class="d-flex flex-column align-items-center" style="gap: .5rem">
                         <div class="d-flex align-items-center justify-content-center" style="gap: .5rem">
                             <button class="btn btn-outline-secondary"
-                            (click)="shoppingCartService.decreaseQuantity(product.id)">-</button>
+                            (click)="decreaseQuantity()">-</button>
                             
                             <div>
                                 <span class="fs-3">{{ quantity() }}</span> en el carrito
                             </div>
                             
                             <button class="btn btn-outline-secondary"
-                            (click)="shoppingCartService.increaseQuantity(product.id, product.name)">+</button>
+                            (click)="increaseQuantity()">+</button>
                         </div>
                         <button class="btn btn-danger btn-sm"
-                            (click)="shoppingCartService.removeFromCart(product.id)">
+                            (click)="removeFromCart()">
                             Remove
                         </button>
                     </div>

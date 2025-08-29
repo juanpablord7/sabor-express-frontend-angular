@@ -3,6 +3,7 @@ import CartItem from '../../../models/cartItem.model';
 import Product from '../../../models/product.model';
 import { FormatCurrencyService } from '../../../utils/format-currency/format-currency.service';
 import { ShoppingCartService } from '../../../services/shopping-cart/shopping-cart.service';
+import { ImageApiService } from '../../../services/api/image-api.service';
 
 @Component({
   selector: 'app-cart-item',
@@ -13,6 +14,10 @@ import { ShoppingCartService } from '../../../services/shopping-cart/shopping-ca
 export class CartItemComponent {
   @Input() cartItem: CartItem;
   @Input() product?: Product;
+
+  private imageApiService = inject(ImageApiService);
+
+  imagePath = this.imageApiService.getImageUrl
 
   formatCurrencyService = inject(FormatCurrencyService);
   shoppingCartService = inject(ShoppingCartService)
@@ -29,9 +34,5 @@ export class CartItemComponent {
       return this.shoppingCartService.removeFromCart(this.cartItem.id);
     }
   }
-
-  imagePath = ""
-
-
 
 }
